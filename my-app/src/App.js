@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+export default function App() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+ // useEffect api rickandmorty salvar os links das imagens em um array
+ useEffect(() => {
+    fetch(`https://rickandmortyapi.com/api/character`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `This is an HTTP error: The status is ${response.status}`
+          );
+        }
+        return response.json();
+      })
+      .then((actualData) => {
+        setData(actualData.results);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  return(
+  <div className="App">
+    <h1>Rick and Morty</h1>
+    <div className="cards">
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        data.map((card) => (
+          <div className="card">
+            <img src={card.image} alt={card.name} />
+            <h2>{card.name}</h2>
+            <p>Status: {card.status}</p>
+            <p>Species: {card.species}</p>
+            <p>Type: {card.type}</p>
+            <p>
+              Origin: {card.origin.name}
+              <br />
+              Location: {card.location.name}
+            </p>
+          </div>
+        ))
+      )}
     </div>
-  );
+  </div>
+);
 }
-
-export default App;
