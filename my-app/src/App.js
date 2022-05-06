@@ -32,7 +32,7 @@ return(
         <p>{error}</p>
       ) : (
         data.map((card) => (
-          <div className={`card ${card.status}`}>
+          <div className={`card_${card.status}`}>
             <img src={card.image} alt={card.name} />
             <h2>{card.name}</h2>
             <p>Status: {card.status}</p>
