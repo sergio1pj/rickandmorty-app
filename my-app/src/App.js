@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-
 export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
- // useEffect api rickandmorty salvar os links das imagens em um array
  useEffect(() => {
     fetch(`https://rickandmortyapi.com/api/character`)
       .then((response) => {
@@ -24,8 +22,7 @@ export default function App() {
         setLoading(false);
       });
   }, []);
-
-  return(
+return(
   <div className="App">
     <h1>Rick and Morty</h1>
     <div className="cards">
@@ -35,7 +32,7 @@ export default function App() {
         <p>{error}</p>
       ) : (
         data.map((card) => (
-          <div className="card">
+          <div className={`card ${card.status}`}>
             <img src={card.image} alt={card.name} />
             <h2>{card.name}</h2>
             <p>Status: {card.status}</p>
