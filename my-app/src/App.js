@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import React from "react";
+import CardList from "./components/CardList";
 export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,31 +24,21 @@ export default function App() {
         setLoading(false);
       });
   }, []);
-return(
-  <div className="App">
-    <h1>Rick and Morty</h1>
-    <div className="cards">
-      {loading ? (
-        <p>Loading...</p>
-      ) : error ? (
-        <p>{error}</p>
-      ) : (
-        data.map((card) => (
-          <div className={`card_${card.status}`}>
-            <img src={card.image} alt={card.name} />
-            <h2>{card.name}</h2>
-            <p>Status: {card.status}</p>
-            <p>Species: {card.species}</p>
-            <p>Type: {card.type}</p>
-            <p>
-              Origin: {card.origin.name}
-              <br />
-              Location: {card.location.name}
-            </p>
-          </div>
-        ))
-      )}
-    </div>
-  </div>
+return (
+  React.createElement(
+    "div",
+    { className: "App" },
+    React.createElement(
+      "h1",
+      null,
+      "Rick and Morty"
+    ),
+    React.createElement(CardList, {
+      cards: data,
+      loading: loading,
+      error: error,
+    }
+    )
+  )
 );
 }
