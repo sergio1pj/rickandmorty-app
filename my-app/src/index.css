@@ -7,32 +7,3 @@
   justify-content: center;
   margin-top: 20px;
 }
-.card_Alive{
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.card_Dead{
-  background-color: red;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.card_unknown{
-  background-color: gray;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
