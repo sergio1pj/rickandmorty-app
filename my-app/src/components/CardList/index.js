@@ -3,11 +3,11 @@ import  Card  from "../Card/index";
 import LoadingHOC from "../../hoc/LoadingHOC";
 function CardList({ cards }) {
     return (
-        React.createElement(
-            "div",
-            { className: "cards" },
-            cards.map((card) => React.createElement(Card, { key: card.id, card: card }))
-        )
+        <div className="cards">
+            {cards.map((card) => (
+                <Card key={card.id} card={card} />
+            ))}
+        </div>
     );
 }
 export default LoadingHOC(CardList);

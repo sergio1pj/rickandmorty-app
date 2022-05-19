@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
-import React from "react";
+import Navbar from "./components/Navbar";
 import CardList from "./components/CardList";
+import {Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import Home from "./pages";
+import About from "./pages/about";  
 export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -24,21 +27,21 @@ export default function App() {
         setLoading(false);
       });
   }, []);
-return (
-  React.createElement(
-    "div",
-    { className: "App" },
-    React.createElement(
-      "h1",
-      null,
-      "Rick and Morty"
-    ),
-    React.createElement(CardList, {
-      cards: data,
-      loading: loading,
-      error: error,
-    }
-    )
-  )
-);
+  //exibir cards ou error ou loading
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+      {loading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>{error}</div>
+      ) : (
+        <CardList cards={data} />
+      )}
+    </Router>
+  );
 }
